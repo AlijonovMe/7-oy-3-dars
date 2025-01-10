@@ -1,0 +1,38 @@
+{% if students.has_other_pages %}
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- Previous Button -->
+            {% if students.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ students.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span> <!-- Previous icon -->
+                    </a>
+                </li>
+            {% endif %}
+
+            <!-- Page Numbers -->
+            {% for page in students.paginator.page_range %}
+                {% if page == students.number %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                {% elif page > students.number|add:-3 and page < students.number|add:3 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Next Button -->
+            {% if students.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ students.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span> <!-- Next icon -->
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}

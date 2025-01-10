@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Najot Ta'lim</title>
+    {% include 'parts/_style.html' %}
+</head>
+<body>
+
+{% include 'parts/_navbar.html' %}
+
+<main class="mt-5 mb-5 container">
+
+    {% if messages %}
+    <div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050; width: 50%;">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show text-center"
+             role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block main %}
+    {% endblock main %}
+</main>
+
+{% include 'parts/_footer.html' %}
+
+{% include 'parts/_js.html' %}
+</body>
+</html>

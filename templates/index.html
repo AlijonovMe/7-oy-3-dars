@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<!-- Search Form -->
+<form method="get" action="{% url 'search' %}" class="d-flex mx-auto my-4"
+      style="width: 100%; max-width: 600px;">
+    <div class="input-group"
+         style="box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); border-radius: 50px; overflow: hidden;">
+        <input
+                type="search"
+                name="q"
+                class="form-control border-0"
+                placeholder="Qidirish"
+                aria-label="Qidirish"
+                aria-describedby="search-addon"
+                style="border-radius: 50px 0 0 50px; height: 50px; font-size: 16px;"
+        />
+        <button
+                type="submit"
+                class="btn btn-light"
+                style="border-radius: 0 50px 50px 0; height: 50px; background-color: #f8f9fa; border: none;"
+        >
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
+<!-- End Search Form -->
+
+<!-- Courses Section -->
+<div class="container my-5">
+    {% if courses %}
+    <h2 class="text-center mb-4">Kurslarimiz</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for course in courses %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-light">
+                <div class="position-absolute top-0 end-0 p-2">
+                    {% if perms.manager.change_course %}
+                    <a href="{% url 'updateCourse' course.id %}" class="text-dark me-2">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if perms.manager.delete_course %}
+                    <a href="{% url 'deleteCourse' course.id %}" class="text-dark">
+                        <i class="far fa-trash-can"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">Qo'shilgan sana: {{ course.created_at }}</p>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <a href="{% url 'course_detail' course.id %}" class="btn btn-primary w-100">Kursga o'tish</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="text-center mb-4">Hozirda kurslar mavjud emas.</h2>
+    {% endif %}
+</div>
+
+<!-- Students Section -->
+<div class="container my-5">
+    {% if students %}
+    <h2 class="text-center mb-4">Talabalarimiz</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for student in students %}
+        <div class="col">
+            <div class="card shadow-sm border-light">
+                <div class="card-body">
+                    <h5 class="card-title">{{ student.name }} {{ student.lastname }}</h5>
+                    <p class="card-text">{{ student.course.title }}</p>
+                    <a href="{% url 'student_detail' student.id %}" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-info-circle"></i> Batafsil
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="text-center mb-4">Hozirda talabalar mavjud emas.</h2>
+    {% endif %}
+</div>
+
+{% include 'parts/_pagination.html' %}
+
+{% endblock main %}

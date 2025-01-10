@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="text-center mb-0">Xabar yuborish</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                {% for error in form.non_field_errors %}
+                                    <p style="font-size: 0.875rem;">{{ error }}</p>
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+
+                         {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+
+                                {% if field.errors %}
+                                    <div class="text-danger mt-2" role="alert">
+                                        {% for error in field.errors %}
+                                            <p style="font-size: 0.875rem;">{{ error }}</p>
+                                        {% endfor %}
+
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

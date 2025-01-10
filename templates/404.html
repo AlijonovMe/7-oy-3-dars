@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<style>
+    .error-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: calc(75vh - 50px - 50px);
+    }
+
+    .error-page h1 {
+        font-size: 6rem;
+        font-weight: bold;
+        color: #f44336;
+    }
+
+    .error-page h2 {
+        font-size: 2rem;
+        color: #757575;
+    }
+
+    .error-page p {
+        font-size: 1.25rem;
+        color: #757575;
+        margin-top: 10px;
+    }
+
+    .error-page a {
+        font-size: 1rem;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .error-page a:hover {
+        text-decoration: underline;
+    }
+
+    /* Navbar max height */
+    .navbar {
+        height: 56px;
+    }
+
+    /* Footer styling */
+    .footer {
+        height: 60px;
+        background-color: #f8f9fa;
+        text-align: center;
+        line-height: 60px;
+        color: #6c757d;
+    }
+</style>
+
+<div class="container error-page">
+    <h1>404</h1>
+    <h2>Sahifa Topilmadi</h2>
+    <p>Qidirgan sahifangiz o'chirilgan, nomi o'zgartirilgan yoki vaqtincha mavjud emas.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary btn-lg text-white">Bosh sahifaga qaytish</a>
+</div>
+
+{% endblock main %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Ro'yxatdan o'tish</h2>
+
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                {% if forms.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissible fade show text-center position-fixed top-0 start-50 translate-middle-x mt-3"
+                                     role="alert" style="width: 50%; z-index: 1050; margin-top: 10px;">
+                                    {% for error in forms.non_field_errors %}
+                                    <p style="font-size: 0.875rem;">{{ error }}</p>
+                                    {% endfor %}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                                {% endif %}
+
+                                {% for field in forms %}
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    {{ field }}
+                                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                </div>
+
+                                {% if field.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show text-center position-fixed top-0 start-50 translate-middle-x mt-3"
+                                     role="alert" style="width: 50%; z-index: 1050; margin-top: 10px;">
+
+                                    {% for error in field.errors %}
+                                    <p style="font-size: 0.875rem;">{{ error }}</p>
+                                    {% endfor %}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                                {% endif %}
+
+                                {% endfor %}
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit"
+                                            data-mdb-ripple-init
+                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-white">
+                                        Ro'yxatdan o'tish
+                                    </button>
+                                </div>
+
+                                <p class="text-center text-muted mt-5 mb-0">Hisobingiz bormi? <a
+                                        href="{% url 'login' %}"
+                                        class="fw-bold text-black text-decoration-none">Kirish</a>
+                                </p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}

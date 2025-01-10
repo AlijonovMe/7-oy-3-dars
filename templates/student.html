@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<!-- Student Detail Section -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Talaba: {{ student.name }} {{ student.lastname }}</h2>
+
+  <div class="card shadow-sm border-light">
+    <div class="card-body">
+      <h5 class="text-center card-title">Talaba haqida batafsil ma'lumot!</h5>
+      <br>
+      <p class="card-text"><strong>To'liq ismi:</strong> {{ student.name }} {{ student.lastname }}</p>
+      <p class="card-text"><strong>Email:</strong> {{ student.email }}</p>
+      <p class="card-text"><strong>Ro'yxatdan o'tgan:</strong> {{ student.enrolled_at|date:'d F, Y H:i' }}</p>
+      <br>
+      <h5 class="text-center card-title">Kursi haqida batafsil ma'lumot!</h5>
+      <br>
+      <p class="card-text"><strong>Kurs nomi:</strong> {{ student.course.title }}</p>
+      <p class="card-text"><strong>Kurs tavsifi:</strong> {{ student.course.description|linebreaks }}</p>
+      <p class="card-text"><strong>Kurs qo'shilgan vaqti:</strong> {{ student.course.created_at }}</p>
+    </div>
+  </div>
+
+  <a href="{% url 'index' %}" class="btn btn-secondary mt-4">Orqaga qaytish</a>
+</div>
+
+{% endblock main %}
