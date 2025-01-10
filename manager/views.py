@@ -182,7 +182,8 @@ def sendEmail(request: WSGIRequest):
                     subject,
                     message,
                     None,
-                    [user.email]
+                    [user.email],
+                    fail_silently=False
                 )
 
             messages.success(request, "Xabaringiz foydalanuvchilarga muvaffaiyatli yuborildi.")
